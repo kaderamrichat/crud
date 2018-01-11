@@ -22,7 +22,8 @@ include "inc/head.php";
 
     <?php if (isset($products) && count($products)): ?>
     <p>Liste des produits présent dans votre stock :</p>
-            <table>
+    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+        <table>
             <tr>
                 <?php
                 $meta2 = $exec->getColumnMeta(0);
@@ -33,7 +34,7 @@ include "inc/head.php";
                      }?>
                     <th>Editer</th>
                     <th>
-                        <input type="submit" name="delete_users" class="btn danger" value="Effacer">
+                        <input type="submit" name="delete_products" class="btn danger" value="Effacer">
                     </th>
             </tr>
 
@@ -49,6 +50,7 @@ include "inc/head.php";
                 </tr>";
             } ?>
             </table>
+    </form>        
     <?php endif ?>
     </div>
 </body>

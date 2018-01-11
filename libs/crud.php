@@ -24,6 +24,10 @@ if(isset($_POST["create_product"])){
 	createProduct();
 }
 
+if (isset($_POST['delete_products']) && isset($_POST['delete_product_ids']) && count($_POST['delete_product_ids'])){
+    removeProduct();
+}
+
 
 function getProducts(){
     global $db;
@@ -71,6 +75,21 @@ function createProduct(){
 	$res=$statement->execute();
 	$msg_crud=($res===true)? "insertion ok" : "soucis à l'insertion";
 	header("Location:index.php");
+}
+
+function removeProduct(){
+    global $db;
+
+    $chekeds = $_POST['delete_product_ids'];
+
+    $sql = "DELETE FROM `produits` WHERE `id` = :id";
+    foreach($_POST["delete_product_ids"] as $id ){
+        $statement = $db->prepare( $sql);
+        $statement->bindParam(":id",$id,PDO::PARAM_STR);
+        $res = $statement->execute();
+        // $statement->execute( array( ":id_to_delete" => $id) ); // on peur faire comme ca aussi
+    }
+    header("location: index.php");// il faut auncun code HTML avec un header:Location
 }
 
 ?>
