@@ -1,2 +1,5 @@
 # crud
-simple CRUD app
+simple CRUD app in Js without persistent data
+---
+
+
